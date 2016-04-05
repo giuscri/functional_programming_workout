@@ -90,4 +90,4 @@ let prop__filter_app (fn:int -> bool) (lst:int list) =
 let divisors n =
     [1 .. n] |> filter (fun x -> x%n = 0);;
 
-let is_prime n = divisors n |> len = 0;;
+let is_prime n = divisors n |> len = 2;;
