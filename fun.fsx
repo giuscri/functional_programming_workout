@@ -8,7 +8,6 @@ let l1 = [1 .. 10]
 let square = fun x -> (float x) ** 2. |> int;;
 let l2 = l1 |> map square;;
 
-//let l3 = l2 |> map (fun x -> (x, if x%2 = 0 then "pari" else "dispari"));;
 let l3 = l2 |> map (fun x ->
     match x%2 with
         |0 -> (x, "pari")
@@ -56,7 +55,6 @@ let rec len lst =
 
 let prop_filter_len (fn:int -> bool) (lst:int list) =
     let filtered = lst |> filter fn in
-    //List.length filtered <= List.length lst;;
     len filtered <= len lst;;
 
 do Check.Quick prop_filter;;
