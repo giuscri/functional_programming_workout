@@ -11,10 +11,29 @@ type valG = {
 let valuta (r:valV) =
     let (n, d) = (r.nameV, r.dataV) in
     match d with
-        |d when d < 18 -> {nameG = n; dataG = "insufficiente"}
-        |d when d <= 22 -> {nameG = n; dataG = "sufficiente"}
-        |d when d <= 27 -> {nameG = n; dataG = "buono"}
-        |d -> {nameG = n; dataG = "ottimo"};;
+        |d when d < 18 ->
+            {
+                nameG = n;
+                dataG = "insufficiente"
+            }
+
+        |d when d <= 22 ->
+            {
+                nameG = n;
+                dataG = "sufficiente"
+            }
+
+        |d when d <= 27 -> 
+            {
+                nameG = n;
+                dataG = "buono"
+            }
+
+        |d ->
+            {
+                nameG = n;
+                dataG = "ottimo"
+            };;
 
 let rec valutaList (lst:valV list) =
     match lst with
