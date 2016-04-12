@@ -1,6 +1,7 @@
 #r @"FsCheck"
 open FsCheck
 
+(*
 let rec dotProduct lst0 lst1 = 
     match (lst0, lst1) with
         |(_, []) -> 0
@@ -40,7 +41,7 @@ let p2 (lst0:'a list) (fn:'a -> bool) =
         |([], _) -> true
         |(x::_, y::_) -> x = y
 
-do Check.Verbose p1
+//do Check.Verbose p1
 
 let rec dropWhile lst fn =
     match lst with
@@ -64,3 +65,27 @@ let optMapBinary a b fn =
 let optPlus a b = optMapBinary a b (+)
 
 let optTimes a b = optMapBinary a b ( * )
+*)
+
+type form = 
+    |F of bool
+    |Not of form
+    |And of form * form
+    |Or of form * form
+
+let rec eval f =
+    match f with
+        |F (e) -> e
+        |Not (e) -> not (eval e)
+        |And (e0, e1) -> (eval e0) && (eval e1)
+        |Or (e0, e1) -> (eval e0) || (eval e1)
+
+let rec toString f =
+    match f with
+        |F (e) -> sprintf "%b" e
+        |Not (e) -> sprintf "- (%s)" (toString e)
+        |And (e0, e1) -> sprintf "(%s /\ %s)" (toString e0) (toString e1)
+        |Or (e0, e1) -> sprintf "(%s \/ %s)" (toString e0) (toString e1)
+
+let main f =
+    sprintf "Il risultato da valutare %s e' %b" (toString f) (eval f)
